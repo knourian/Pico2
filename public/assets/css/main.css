@@ -1,0 +1,231 @@
+@font-face {
+    font-family: "IRANSansWeb";
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/IRANSansWeb_Light.eot') format("embedded-opentype"), url('../fonts/IRANSansWeb_Light.woff') format("woff");
+
+
+    font-family: "IRANSansWeb";
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/IRANSansWeb_Light.eot') format("embedded-opentype"), url('../fonts/IRANSansWeb_Light.woff') format("woff");
+}
+
+
+body {
+    font-family: "IRANSansWeb";
+}
+
+.divBtns {
+	text-align: center;
+    margin: 30px;
+}
+
+.divBtns button {
+	background-color: #83859b;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 10px;
+}
+body {
+    font-family: "IRANSansWeb";
+}
+
+/*checkbox style*/
+.formCheckBox {
+    background-color: #00E640;
+}
+
+.formCheckBox p {
+    margin-top: 10px;
+}
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+}
+
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 1.25em; height: 1.25em;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '✔';
+    position: absolute;
+    top: .2em; left: .275em;
+    font-size: 1.4em;
+    line-height: 0.8;
+    color: #D91E18;
+    transition: all .2s;
+    font-family: Helvetica, Arial, sans-serif;
+}
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    border: 2px dotted blue;
+}
+
+label:hover:before {
+    border: 2px solid #4778d9!important;
+}
+
+/* start sec */
+.divStart {
+    float: right;
+}
+
+.btnStart {
+    padding: 5px 30px;
+    color: #ffffff;
+    background-color: #26C281;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btnStart:hover , .btnDelete:hover , .btnEdit:hover  {
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.4);
+}
+
+.btnStart:focus, .btnDelete:focus , .btnEdit:focus {
+    text-decoration: none;
+    outline: none;
+    color: #ffffff;
+}
+
+.divEnd {
+    float: left;
+}
+
+.btnEdit {
+    padding: 5px 30px;
+    color: #ffffff;
+    background-color: #039be5;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btnDelete {
+    padding: 5px 30px;
+    color: #ffffff;
+    background-color: #d32f2f;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+/*modal*/
+.modal-lg {
+    width: 95% !important;
+}
+
+.modal-title {
+    text-align: right;
+}
+
+.btnSuccessStart {
+}
+
+/*chart*/
+.chart {
+    width: 100%;
+    height: 400px;
+    border:1px solid grey;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+.main-screen {
+    height: 600px;
+}
+
+.bg-screen {
+    
+    height: 10%;
+    padding: 1px 10px;
+    color: #fff;
+}
+
+.bg-red {
+    background-image: -webkit-gradient(linear, top, bottom, color-stop(0, #F88277), color-stop(1, #F22613));
+    background-image: -o-linear-gradient(top, #F88277, #F22613);
+    background-image: -moz-linear-gradient(top, #F88277, #F22613);
+    background-image: -webkit-linear-gradient(top, #F88277, #F22613);
+    background-image: linear-gradient(to bottom, #F88277, #F22613);
+}
+
+.bg-blue {
+    background-image: -webkit-gradient(linear, top, bottom, color-stop(0, #7891E2), color-stop(1, #1F3A93));
+    background-image: -o-linear-gradient(top, #7891E2, #1F3A93);
+    background-image: -moz-linear-gradient(top, #7891E2, #1F3A93);
+    background-image: -webkit-linear-gradient(top, #7891E2, #1F3A93);
+    background-image: linear-gradient(to bottom, #7891E2, #1F3A93);
+}
+
+.bg-green {
+    background-image: -webkit-gradient(linear, top, bottom, color-stop(0, #93E6B6), color-stop(1, #2ECC71));
+    background-image: -o-linear-gradient(top, #93E6B6, #2ECC71);
+    background-image: -moz-linear-gradient(top, #93E6B6, #2ECC71);
+    background-image: -webkit-linear-gradient(top, #93E6B6, #2ECC71);
+    background-image: linear-gradient(to bottom, #93E6B6, #2ECC71);
+}
+
+.bg-purple {
+    background-image: -webkit-gradient(linear, top, bottom, color-stop(0, #92DCE3), color-stop(1, #31B1BC));
+    background-image: -o-linear-gradient(top, #92DCE3, #31B1BC);
+    background-image: -moz-linear-gradient(top, #92DCE3, #31B1BC);
+    background-image: -webkit-linear-gradient(top, #92DCE3, #31B1BC);
+    background-image: linear-gradient(to bottom, #92DCE3, #31B1BC);
+}
+
+.bg-right {
+
+    text-align: right;
+
+}
+
+    .bg-right h1 {
+    margin-right:10%;
+    float:right;
+        font-size: 25px !important;
+        margin-top:-25px ! important
+    }
+
+
+
+
+
+

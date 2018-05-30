@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    
+
+    <style>
+        .led-red {
+    margin: 10px auto;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+}
+
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/jquery.keypad.css">
+    <style>
+
+        .zindexer {
+         z-index:1000;
+        }
+
+
+
+        #inlineKeypad {
+            width: 10em;
+        }
+    </style>
+
+</head>
+<body>
+<div calss="row"></div>
+<div calss="col-md-6">
+
+</div>
+
+
+<script src="assets/js/jquery.3.1.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+    <script src="assets/js/pcioremasterd.js"></script>
+    <script src="assets/js/plotly-latest.min.js"></script>
+
+    <script src="assets/js/jquery.plugin.min.js"></script>
+    <script src="assets/js/jquery.keypad.js"></script>
+
+    <script>
+
+        var ws_config = new WebSocket(host + "/config");
+
+        ws_config.onopen = function () {
+
+
+            var Config = {
+
+
+            "hystersisup ": "1",
+            "hystersisdown": "1",
+            "AlarmLimit1": "1",
+            "AlarmLimit2": "1",
+            "alarmconfig": "True",
+            "ramp": "True",
+            "termocobletype": "1",
+            "alarm hystersis": "1",
+            "PIDParameters": {
+                "P": "1",
+                "I": "1",
+                "D": "1"
+            },
+            "OutputType": {
+                "Channel1": "1",
+                "Channel2": "1",
+                "Channel3": "1",
+                "Channel4": "1",
+                "Channel5": "1",
+                "Channel6": "1"
+
+
+
+            },
+            "TempraturRange": {
+
+                "LimitUp": "1",
+                "LimitDown": "1"
+            },
+            "calibration": {
+                "Channel1": "1",
+                "Channel2": "1",
+                "Channel3": "1",
+                "Channel4": "1",
+                "Channel5": "1",
+                "Channel6": "1"
+
+            }
+
+
+            }
+
+            var jsonconfig = JSON.stringify({ "Config": Config });
+            var put = { "config": Config };
+
+
+
+
+        console.log(put);
+
+        ws_config.send(put);
+        };
+
+
+    </script>
+</body>
+</html>

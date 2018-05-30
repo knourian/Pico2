@@ -1,0 +1,44 @@
+{
+
+
+  "hystersisup ": " ",
+  "hystersisdown": " ",
+  "AlarmLimit1": "",
+  "AlarmLimit2": "",
+  "alarmconfig": "True",
+  "ramp": "True",
+  "termocobletype": "",
+  "alarm hystersis": "",
+  "PIDParameters": {
+    "P": "",
+    "I": "",
+    "D": ""
+  },
+  "OutputType": {
+    "Channel1": "",
+    "Channel2": "",
+    "Channel3": "",
+    "Channel4": "",
+    "Channel5": "",
+    "Channel6": ""
+
+
+
+  },
+  "TempraturRange": {
+
+    "LimitUp": "",
+    "LimitDown": ""
+  },
+  "calibration": {
+    "Channel1": "",
+    "Channel2": "",
+    "Channel3": "",
+    "Channel4": "",
+    "Channel5": "",
+    "Channel6": ""
+
+  }
+
+
+}

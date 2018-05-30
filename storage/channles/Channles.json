@@ -1,0 +1,88 @@
+{
+  "channle": [
+    {
+      "id": "1",
+	  "activated":"true",
+      "profile": {
+        "type": "profile",
+        "data": [
+          [ 0, 10 ],
+          [ 60, 100 ],
+          [ 180, 82 ],
+          [ 225, 176 ]
+        ],
+        "name": "lead"
+      }
+    },
+    {
+      "id": "2",
+	    "activated":"true",
+      "profile": {
+        "type": "profile",
+        "data": [
+          [ 0, 20 ],
+          [ 60, 20 ],
+          [ 180, 82 ],
+          [ 225, 176 ]
+        ],
+        "name": "lead"
+      }
+    },
+    {
+      "id": "3",
+	    "activated":"true",
+      "profile": {
+        "type": "profile",
+        "data": [
+          [ 0, 20 ],
+          [ 60, 100 ],
+          [ 180, 82 ],
+          [ 225, 176 ]
+        ],
+        "name": "lead"
+      }
+    },
+    {
+      "id": "4",
+	    "activated":"true",
+      "profile": {
+        "type": "profile",
+        "data": [
+          [ 0, 40 ],
+          [ 60, 100 ],
+          [ 180, 88 ],
+          [ 225, 176 ]
+        ],
+        "name": "leadfree"
+      }
+    },
+    {
+      "id": "5",
+	    "activated":"true",
+      "profile": {
+        "type": "profile",
+        "data": [
+          [ 0, 20 ],
+          [ 60, 100 ],
+          [ 180, 82 ],
+          [ 225, 176 ]
+        ],
+        "name": "lead"
+      }
+    },
+    {
+      "id": "6",
+	    "activated":"true",
+      "profile": {
+        "type": "profile",
+        "data": [
+          [ 0, 40 ],
+          [ 60, 100 ],
+          [ 180, 88 ],
+          [ 225, 176 ]
+        ],
+        "name": "leadfree"
+      }
+    }
+  ]
+}

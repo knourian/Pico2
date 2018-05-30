@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        .led-red {
+    margin: 10px auto;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+}
+      .led-white {
+    margin: 10px auto;
+    width: 25px;
+    height: 25px;
+    background-color:white;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+}
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/jquery.keypad.css">
+    <style>
+
+        .zindexer {
+         z-index:1000;
+        }
+
+
+
+        #inlineKeypad {
+            width: 10em;
+        }
+    </style>
+
+</head>
+<body>
+
+
+    <!--<div class=" newprofilegraph">
+
+        <input value="15" class="targettime" />
+        <input value="63" class="targettemp" /> 
+       
+
+    </div>
+    <div class=" newprofilegraph">
+
+        <input value="9" class="targettime" />
+        <input value="10" class="targettemp" />
+
+
+    </div>
+    <div class=" newprofilegraph">
+
+        <input value="8" class="targettime" />
+        <input value="15" class="targettemp" />
+
+
+    </div>-->
+<form class="formCheckBox" action="#">
+    <div class="container">
+        <input type="button" class="selectall_" id="selectall" />
+                    <label for="channel1">انتخاب همه</label>
+
+        <div class="row" id="livechannles">
+
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <p>
+                    <input type="checkbox" class="selectall" id="channel1" />
+                    <label for="channel1">کانال 1</label>
+                </p>
+                <div class="channel1_led "></div>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <p>
+                    <input type="checkbox" class="selectall" id="channel2" />
+                    <label for="channel2">کانال 2</label>
+                </p>
+                <div class="channel2_led"></div>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <p>
+                    <input type="checkbox" class="selectall" id="channel3" />
+                    <label for="channel3">کانال3</label>
+                </p>
+                <div class="channel3_led"></div>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <p>
+                    <input type="checkbox" class="selectall" id="channel4" />
+                    <label for="channel4">کانال 4</label>
+                </p>
+                <div class="channel4_led"></div>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <p>
+                    <input type="checkbox" class="selectall" id="channel5" />
+                    <label for="channel5">کانال 5</label>
+                </p>
+                <div class="channel5_led"></div>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6">
+                <p>
+                    <input type="checkbox" class="selectall" id="channel6" />
+                    <label for="channel6">کانال 6</label>
+                </p>
+                <div class="channel6_led"></div>
+            </div>
+        </div>
+    </div>
+
+</form>
+    
+    <input value="شروع" type="button" onclick="runTask()" />
+    <input value="توقف" type="button" onclick="stoptask()" />
+<!-- start div -->
+<div style="margin-top: 30px;border-bottom: 1px solid #000000;padding-bottom: 30px;">
+    <div class="container">
+        <div class="divStart">
+
+            <a href="#" class="btnStart" data-target="#startModal" onclick="getchannles()" data-toggle="modal" >ویرایش کانال ها</a>
+            <!-- Modal -->
+            <div class="modal fade" role="dialog" id="startModal">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">انتخاب کانال مربوطه</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" id="chlist">
+                                <label> ch1 </label>
+                                <select id="1" class=" sendprofileforchannle selectpicker ">
+                                   
+                                </select>
+                                <label> ch2 </label>
+                                <select id="2" class=" sendprofileforchannle selectpicker  ">
+                                  
+                                </select>
+                                <label> ch3</label>
+                                <select id="3" class="sendprofileforchannle selectpicker ">
+                                   
+                                </select>
+                                <label> ch4 </label>
+                                <select id="4" class=" sendprofileforchannle selectpicker ">
+                                   
+                                </select>
+                                <label> ch5 </label>
+                                <select id="5" class=" sendprofileforchannle selectpicker ">
+                                  
+                                </select>
+                                <label> ch6 </label>
+                                <select id="6" class=" sendprofileforchannle selectpicker ">
+                                   
+                                </select>
+                            </div>
+
+                            <div style="text-align: center;margin-top: 100px">
+                                <input type="submit" onclick="setprofileforchannle()" value="ثبت" class="btn btn-success btnSuccessStart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="divEnd">
+
+
+
+         
+
+        </div>
+    </div>
+</div>
+
+<!-- chart -->
+
+
+
+
+    <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <div class="">
+    <div class="">
+        <!--<div id="liveChart"></div>-->
+        <div class="container main-screen">
+            <div class="bg-screen bg-red">
+                <div>
+                    <h3>Channel 1</h3>
+                </div>
+
+                <div class="bg-right">
+                    <h1 id="channel_1">00.00</h1>
+                </div>
+            </div>
+            <div class="bg-screen bg-blue">
+                <div>
+                    <h3 >Channel 2</h3>
+                </div>
+                <div class="bg-right">
+                    <h1 id="channel_2">00.00</h1>
+                </div>
+            </div>
+            <div class="bg-screen bg-green">
+                <div>
+                    <h3 >Channel 3</h3>
+                </div>
+                <div class="bg-right">
+                    <h1 id="channel_3">00.00</h1>
+                </div>
+            </div>
+            <div class="bg-screen bg-purple">
+                <div>
+                    <h3>Channel 4</h3>
+                </div>
+                <div class="bg-right">
+                    <h1 id="channel_4">00.00</h1>
+                </div>
+            </div>
+            <div class="bg-screen bg-purple">
+                <div>
+                    <h3>Channel 5</h3>
+                </div>
+                <div class="bg-right">
+                    <h1 id="channel_5">00.00</h1>
+                </div>
+            </div>
+            <div class="bg-screen bg-purple">
+                <div>
+                    <h3>Channel 6</h3>
+                </div>
+                <div class="bg-right">
+                    <h1 id="channel_6">142.0</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+  <div id="menu1" class="tab-pane fade">
+
+            <!-- Modal -->
+            <div class="" style="" role="dialog" id="editModal">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">اضافه کردن پروفایل</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="newprofilegraph"></div>
+                            <div class="divBtns">
+                                <button onclick="myCreateFunction()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <button onclick="myDeleteFunction()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="container">
+                                <label>نام پروفایل جدید</label>
+                                <input type="text" id="newprofilename" class="col-md-3 form-control" />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>عنوان اول</th>
+                                            <th>عنوان دوم</th>
+                                            <th>عنوان سوم</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="myTable">
+                                        <tr class="newprofilegraphdata">
+                                            <td class="targettime">
+                                                <input type="text"  class="  form-control">
+                                            </td>
+                                            <td class="targettemp">
+                                                <input type="text"  class="  form-control">
+                                            </td>
+                                            <td>
+                                                <input type="text" readonly="readonly" class="form-control">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <input type="button" value="saveprofile" onclick="savenewprofile()" />
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+
+            <!-- Modal -->
+            <div class="" role="dialog" id="endModal">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ویرایش پروفایل</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="dropdown" style="text-align: right">
+                                <select onchange="findselectedprofile()" id="selectprofileforediting" class=".selectprofileforediting">
+                                    <option value="">انتخاب </option>
+
+                                </select>
+                                <div class="divBtns">
+                                    <button onclick="myCreateFunction_edit()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    <button onclick="myDeleteFunction_edit()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="container">
+
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>عنوان اول</th>
+                                                <th>عنوان دوم</th>
+                                                <th>عنوان سوم</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable_edit">
+                                            <tr class="editprofilegraphdata">
+                                                <td class="targettime">
+                                                    <input type="text" class="  form-control">
+                                                </td>
+                                                <td class="targettemp">
+                                                    <input type="text" class="  form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" readonly="readonly" class="form-control">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <input type="button" value="saveprofile" onclick="saveeditedprofile()" />
+                            </div>
+                            <div id="editprofilegraph"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+  </div>
+</div>
+    <!--<p><input type="text" class="defaultKeypad" id="defaultKeypad"></p>
+    <p><input type="text" id="defaultKeypad" class=" defaultKeypad form-control  " /></p>
+ <p><input type="text" id="defaultKeypad" class=" defaultKeypad form-control  " /></p>
+<p><input type="text" readonly="readonly" class=" form-control" /></p>-->
+
+<script src="assets/js/jquery.3.1.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+    <script src="assets/js/pcioremasterd.js"></script>
+    <script src="assets/js/plotly-latest.min.js"></script>
+
+    <script src="assets/js/jquery.plugin.min.js"></script>
+    <script src="assets/js/jquery.keypad.js"></script>
+
+     <script>
+
+
+
+        ws_config.onopen = function () {
+
+
+            var Config = {
+
+
+            "hystersisup ": "1",
+            "hystersisdown": "1",
+            "AlarmLimit1": "1",
+            "AlarmLimit2": "1",
+            "alarmconfig": "True",
+            "ramp": "True",
+            "termocobletype": "1",
+            "alarm hystersis": "1",
+            "PIDParameters": {
+                "P": "1",
+                "I": "1",
+                "D": "1"
+            },
+            "OutputType": {
+                "Channel1": "1",
+                "Channel2": "1",
+                "Channel3": "1",
+                "Channel4": "1",
+                "Channel5": "1",
+                "Channel6": "1"
+
+
+
+            },
+            "TempraturRange": {
+
+                "LimitUp": "1",
+                "LimitDown": "1"
+            },
+            "calibration": {
+                "Channel1": "1",
+                "Channel2": "1",
+                "Channel3": "1",
+                "Channel4": "1",
+                "Channel5": "1",
+                "Channel6": "1"
+
+            }
+
+
+            }
+
+            var jsonconfig = JSON.parse({ "Config": Config });
+            var put = { "config": jsonconfig };
+
+
+
+
+        console.log(put);
+
+        ws_config.send(put);
+        };
+
+
+    </script>
+</body>
+</html>
