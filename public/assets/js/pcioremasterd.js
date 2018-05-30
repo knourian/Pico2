@@ -87,6 +87,7 @@ function spotactivatechannles() {
                     x.activated = "true"
                     channels.channel[i] = x;
                     console.log(x.activated);
+					console.log('hello');
 
                 } else {
                     x.activated = "false";
