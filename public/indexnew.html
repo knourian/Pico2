@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.rtl.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/jquery.keypad.css">
+    <link rel="stylesheet" href="assets/css/jquery.keypad.css">.
+    <link rel="stylesheet" href="assets/css/c3.css">.
     <style>
 
         .zindexer {
@@ -200,6 +201,7 @@
   <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
   <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
   <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+  <li><a data-toggle="tab" href="#cahrt">Charts</a></li>
 </ul>
 
 <div class="tab-content">
@@ -371,6 +373,34 @@
             </div>
 
   </div>
+  <div id="cahrt" class="tab-pane fade ">
+      <div class="row">
+          <div class="col-sd-4 col-md-4">
+              <div id="chart1" style="max-width:200px  "></div>
+          </div>
+          <div class="col-sd-4  col-md-4">
+              <div id="chart2" style="max-width:200px  "></div>
+          </div>
+          <div class="col-sd-4  col-md-4">
+              <div id="chart3" style="max-width:200px  "></div>
+          </div>
+          <div class="col-sd-4  col-md-4">
+              <div id="chart4" style="max-width:200px  "></div>
+          </div>
+          <div class="col-sd-4  col-md-4">
+              <div id="chart5" style="max-width:200px   "></div>
+          </div>
+          <div class="col-sd-4  col-md-4">
+              <div id="chart6" style="max-width:200px  "></div>
+          </div>
+      </div>
+   
+     
+      
+       
+       
+
+    </div>
 </div>
     <!--<p><input type="text" class="defaultKeypad" id="defaultKeypad"></p>
     <p><input type="text" id="defaultKeypad" class=" defaultKeypad form-control  " /></p>
@@ -385,11 +415,67 @@
 
     <script src="assets/js/jquery.plugin.min.js"></script>
     <script src="assets/js/jquery.keypad.js"></script>
-
+    <script src="assets/js/d3-5.4.0.min.js"></script>
+    <script src="assets/js/c3.min.js"></script>
      <script>
+         var chart = c3.generate({
+             bindto: '#chart1',
+             data: {
+                 columns: [
+                     ['dchanelname', 30, 200, 100],
+                     ['data2', 50, 20, 10, 40, 15, 25]
+                 ]
+             }
+         });
+         var chart = c3.generate({
+             bindto: '#chart2',
+             data: {
+                 columns: [
+                     ['dchanelname', 30, 200, 100],
+                     ['data2', 50, 20, 10, 40, 15, 25]
+                 ]
+             }
+         });
 
+         var chart = c3.generate({
+             bindto: '#chart3',
+             data: {
+                 columns: [
+                     ['dchanelname', 30, 200, 100],
+                     ['data2', 50, 20, 10, 40, 15, 25]
+                 ]
+             }
+         });
 
+         var chart = c3.generate({
+             bindto: '#chart4',
+             data: {
+                 columns: [
+                     ['dchanelname', 30, 200, 100],
+                     ['data2', 50, 20, 10, 40, 15, 25]
+                 ]
+             }
+         });
 
+         var chart = c3.generate({
+             bindto: '#chart5',
+             data: {
+                 columns: [
+                     ['dchanelname', 30, 200, 100],
+                     ['data2', 50, 20, 10, 40, 15, 25]
+                 ]
+             }
+         });
+
+         var chart = c3.generate({
+             bindto: '#chart6',
+             data: {
+                 columns: [
+                     ['dchanelname', 30, 200, 100],
+                     ['data2', 50, 20, 10, 40, 15, 25]
+                 ]
+             }
+         });
         ws_config.onopen = function () {
 
 
