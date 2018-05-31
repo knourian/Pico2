@@ -124,9 +124,9 @@ class Oven(threading.Thread):
                     "running at Channel %d %.1f deg C (Target: %.1f) , heat %.2f, cool %.2f, air %.2f, door %s (%.1fs/%.0f)" % (
                     self.channel,self.temp_sensor.temperature, self.target, self.heat, self.cool, self.air, self.door, self.runtime,
                     self.totaltime))
-                buf = "{%d , %d}" % (self.runtime, self.temp_sensor)
+                buf = "{%.1f , %.1fs}\n" % (self.runtime, self.temp_sensor.temperature)
                 dirpath=config.Data_path
-                dirpath=os.path.join(dirpath, self.channel)+".txt"
+                dirpath=os.path.join(dirpath, "%d.%s"%(self.channel,"txt"))
                 f=open(dirpath,"a+")
                 f.write(buf)
                 f.close()

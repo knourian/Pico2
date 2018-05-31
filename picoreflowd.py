@@ -33,10 +33,10 @@ sys.path.insert(0, script_dir + '/lib/')
 profile_path = os.path.join(script_dir, "storage", "profile")
 
 Data_path = os.path.join(script_dir, "storage", "Data")
+config.Data_path=Data_path
 
 from lib.oven import Oven, Profile
 from lib.ovenWatcher import OvenWatcher
-config.Data_path=Data_path
 app = bottle.Bottle()
 oven = Oven()
 ovenWatcher = OvenWatcher(oven)
@@ -59,6 +59,9 @@ def get_websocket_from_request():
     if not wsock:
         bottle.abort(400, 'Expected WebSocket request.')
     return wsock
+
+
+
 
 
 @app.route('/control')
@@ -147,6 +150,7 @@ def handle_control():
             elif msgdict.get("cmd") == "STOP":
                 log.info("Stop command received")
                 oven.abort_run()
+                clearFiles();
                 simulated_oven.abort_run();
         except WebSocketError:
             break
@@ -244,6 +248,15 @@ def handle_status():
             break
     log.info("websocket (status) closed")
 
+def clearFiles():
+    try:
+        DataFiles=os.listdir(Data_path)
+    except:
+        DataFiles=[]
+    for filename in DataFiles:
+        with open(os.path.join(Data_path, filename), 'w') as f:
+            f.truncate()
+            f.close()
 
 def get_profiles():
     try:
