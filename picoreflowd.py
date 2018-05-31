@@ -19,8 +19,8 @@ try:
 
     sys.dont_write_bytecode = False
 except:
-    print ("Could not import config file.")
-    print ("Copy config.py.EXAMPLE to config.py and adapt it for your setup.")
+    print("Could not import config file.")
+    print("Copy config.py.EXAMPLE to config.py and adapt it for your setup.")
     exit(1)
 
 logging.basicConfig(level=config.log_level, format=config.log_format)
@@ -28,15 +28,16 @@ log = logging.getLogger("picoreflowd")
 log.info("Starting picoreflowd")
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-log.info("script_dir" + script_dir)
+log.info("script_dir : " + script_dir)
 sys.path.insert(0, script_dir + '/lib/')
 profile_path = os.path.join(script_dir, "storage", "profile")
 
 Data_path = os.path.join(script_dir, "storage", "Data")
+config.Data_path = Data_path
 
 from lib.oven import Oven, Profile
 from lib.ovenWatcher import OvenWatcher
-config.Data_path=Data_path
+
 app = bottle.Bottle()
 oven = Oven()
 ovenWatcher = OvenWatcher(oven)
@@ -74,80 +75,84 @@ def handle_control():
                 log.info("RUN command received")
                 profile_obj = msgdict.get('profile')
                 channel = 1
+                simulateFlag = True
+                channelActived = []
                 if profile_obj:
                     if eval(((profile_obj['channel'][0]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][0]['profile'])
                         profile = Profile(profile_json)
                         channel = 1
-                        simulated_oven = Oven(channel, simulate=True, time_step=0.5)
-                        simulation_watcher = OvenWatcher(simulated_oven)
-                        simulation_watcher.add_observer(wsock)
-                        simulated_oven.run_profile(profile)
-                        simulation_watcher.record(profile)
+                        channelActived.append(channel)
+                        simulated_oven_1 = Oven(channel, simulate=simulateFlag, time_step=0.5)
+                        simulation_watcher_1 = OvenWatcher(simulated_oven_1)
+                        simulation_watcher_1.add_observer(wsock)
+                        simulated_oven_1.run_profile(profile)
+                        simulation_watcher_1.record(profile)
                     if eval(((profile_obj['channel'][1]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][1]['profile'])
                         profile = Profile(profile_json)
                         channel = 2
-                        simulated_oven = Oven(channel, simulate=True, time_step=0.5)
-                        simulation_watcher = OvenWatcher(simulated_oven)
-                        simulation_watcher.add_observer(wsock)
-                        simulated_oven.run_profile(profile)
-                        simulation_watcher.record(profile)
+                        channelActived.append(channel)
+                        simulated_oven_2 = Oven(channel, simulate=simulateFlag, time_step=0.5)
+                        simulation_watcher_2 = OvenWatcher(simulated_oven_2)
+                        simulation_watcher_2.add_observer(wsock)
+                        simulated_oven_2.run_profile(profile)
+                        simulation_watcher_2.record(profile)
                     if eval(((profile_obj['channel'][2]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][2]['profile'])
                         profile = Profile(profile_json)
                         channel = 3
-                        simulated_oven = Oven(channel, simulate=True, time_step=0.5)
-                        simulation_watcher = OvenWatcher(simulated_oven)
-                        simulation_watcher.add_observer(wsock)
-                        simulated_oven.run_profile(profile)
-                        simulation_watcher.record(profile)
+                        channelActived.append(channel)
+                        simulated_oven_3 = Oven(channel, simulate=simulateFlag, time_step=0.5)
+                        simulation_watcher_3 = OvenWatcher(simulated_oven_3)
+                        simulation_watcher_3.add_observer(wsock)
+                        simulated_oven_3.run_profile(profile)
+                        simulation_watcher_3.record(profile)
                     if eval(((profile_obj['channel'][3]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][3]['profile'])
                         profile = Profile(profile_json)
                         channel = 4
-                        simulated_oven = Oven(channel, simulate=True, time_step=0.5)
-                        simulation_watcher = OvenWatcher(simulated_oven)
-                        simulation_watcher.add_observer(wsock)
-                        simulated_oven.run_profile(profile)
-                        simulation_watcher.record(profile)
+                        channelActived.append(channel)
+                        simulated_oven_4 = Oven(channel, simulate=simulateFlag, time_step=0.5)
+                        simulation_watcher_4 = OvenWatcher(simulated_oven_4)
+                        simulation_watcher_4.add_observer(wsock)
+                        simulated_oven_4.run_profile(profile)
+                        simulation_watcher_4.record(profile)
                     if eval(((profile_obj['channel'][4]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][4]['profile'])
                         profile = Profile(profile_json)
                         channel = 5
-                        simulated_oven = Oven(channel, simulate=True, time_step=0.5)
-                        simulation_watcher = OvenWatcher(simulated_oven)
-                        simulation_watcher.add_observer(wsock)
-                        simulated_oven.run_profile(profile)
-                        simulation_watcher.record(profile)
+                        channelActived.append(channel)
+                        simulated_oven_5 = Oven(channel, simulate=simulateFlag, time_step=0.5)
+                        simulation_watcher_5 = OvenWatcher(simulated_oven_5)
+                        simulation_watcher_5.add_observer(wsock)
+                        simulated_oven_5.run_profile(profile)
+                        simulation_watcher_5.record(profile)
                     if eval(((profile_obj['channel'][5]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][5]['profile'])
                         profile = Profile(profile_json)
                         channel = 6
-                        simulated_oven = Oven(channel, simulate=True, time_step=0.5)
-                        simulation_watcher = OvenWatcher(simulated_oven)
-                        simulation_watcher.add_observer(wsock)
-                        simulated_oven.run_profile(profile)
-                        simulation_watcher.record(profile)
-                # log.info("profile Sent: ")
-                # log.info(profile.name)
-                # log.info("channel   : ")
-                # log.info(channel)
-            # elif msgdict.get("cmd") == "SIMULATE":
-            #     log.info("SIMULATE command received")
-            #     profile_obj = msgdict.get('profile')
-            #     if profile_obj:
-            #         profile_json = json.dumps(profile_obj)
-            #         profile = Profile(profile_json)
-            #     simulated_oven = Oven(simulate=True, time_step=0.5)
-            #     simulation_watcher = OvenWatcher(simulated_oven)
-            #     simulation_watcher.add_observer(wsock)
-            #     # simulated_oven.run_profile(profile)
-            #     # simulation_watcher.record(profile)
+                        channelActived.append(channel)
+                        simulated_oven_6 = Oven(channel, simulate=simulateFlag, time_step=0.5)
+                        simulation_watcher_6 = OvenWatcher(simulated_oven_6)
+                        simulation_watcher_6.add_observer(wsock)
+                        simulated_oven_6.run_profile(profile)
+                        simulation_watcher_6.record(profile)
             elif msgdict.get("cmd") == "STOP":
                 log.info("Stop command received")
-                oven.abort_run()
-                simulated_oven.abort_run();
+                if (1 in channelActived):
+                    simulated_oven_1.abort_run()
+                if (2 in channelActived):
+                    simulated_oven_2.abort_run()
+                if (3 in channelActived):
+                    simulated_oven_3.abort_run()
+                if (4 in channelActived):
+                    simulated_oven_4.abort_run()
+                if (5 in channelActived):
+                    simulated_oven_5.abort_run()
+                if (6 in channelActived):
+                    simulated_oven_6.abort_run()
+                clearFiles();
         except WebSocketError:
             break
     log.info("websocket (control) closed")
@@ -243,6 +248,17 @@ def handle_status():
         except WebSocketError:
             break
     log.info("websocket (status) closed")
+
+
+def clearFiles():
+    try:
+        DataFiles = os.listdir(Data_path)
+    except:
+        DataFiles = []
+    for filename in DataFiles:
+        with open(os.path.join(Data_path, filename), 'w') as f:
+            f.truncate()
+            f.close()
 
 
 def get_profiles():
