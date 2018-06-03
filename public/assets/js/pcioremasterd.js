@@ -680,223 +680,6 @@ ws_control.send(JSON.stringify(cmd));
 
 
 
-//function runTaskSimulation()
-//{
-//    var cmd =
-//    {
-//        "cmd": "SIMULATE",
-//        "profile": profiles[selected_profile]
-//    }
-
-//    graph.live.data = [];
-//    graph.plot = $.plot("#graph_container", [ graph.profile, graph.live ] , getOptions());
-
-//    ws_control.send(JSON.stringify(cmd));
-
-//}
-
-
-//function abortTask()
-//{
-//    var cmd = {"cmd": "STOP"};
-//    ws_control.send(JSON.stringify(cmd));
-//}
-
-//function enterNewMode()
-//{
-//    state="EDIT"
-//    $('#status').slideUp();
-//    $('#edit').show();
-//    $('#profile_selector').hide();
-//    $('#btn_controls').hide();
-//    $('#form_profile_name').attr('value', '');
-//    $('#form_profile_name').attr('placeholder', 'Please enter a name');
-//    graph.profile.points.show = true;
-//    graph.profile.draggable = true;
-//    graph.profile.data = [];
-//    graph.plot = $.plot("#graph_container", [ graph.profile, graph.live ], getOptions());
-//    updateProfileTable();
-//}
-
-//function enterEditMode()
-//{
-//    state="EDIT"
-//    $('#status').slideUp();
-//    $('#edit').show();
-//    $('#profile_selector').hide();
-//    $('#btn_controls').hide();
-//    console.log(profiles);
-//    $('#form_profile_name').val(profiles[selected_profile].name);
-//    graph.profile.points.show = true;
-//    graph.profile.draggable = true;
-//    graph.plot = $.plot("#graph_container", [ graph.profile, graph.live ], getOptions());
-//    updateProfileTable();
-//}
-
-//function leaveEditMode()
-//{
-//    selected_profile_name = $('#form_profile_name').val();
-//    ws_storage.send('GET');
-//    state="IDLE";
-//    $('#edit').hide();
-//    $('#profile_selector').show();
-//    $('#btn_controls').show();
-//    $('#status').slideDown();
-//    $('#profile_table').slideUp();
-//    graph.profile.points.show = false;
-//    graph.profile.draggable = false;
-//    graph.plot = $.plot("#graph_container", [ graph.profile, graph.live ], getOptions());
-//}
-
-//function newPoint()
-//{
-//    if(graph.profile.data.length > 0)
-//    {
-//        var pointx = parseInt(graph.profile.data[graph.profile.data.length-1][0])+15;
-//    }
-//    else
-//    {
-//        var pointx = 0;
-//    }
-//    graph.profile.data.push([pointx, Math.floor((Math.random()*230)+25)]);
-//    graph.plot = $.plot("#graph_container", [ graph.profile, graph.live ], getOptions());
-//    updateProfileTable();
-//}
-
-//function delPoint()
-//{
-//    graph.profile.data.splice(-1,1)
-//    graph.plot = $.plot("#graph_container", [ graph.profile, graph.live ], getOptions());
-//    updateProfileTable();
-//}
-
-//function toggleTable()
-//{
-//    if($('#profile_table').css('display') == 'none')
-//    {
-//        $('#profile_table').slideDown();
-//    }
-//    else
-//    {
-//        $('#profile_table').slideUp();
-//    }
-//}
-
-//function saveProfile()
-//{
-//    name = $('#form_profile_name').val();
-//    var rawdata = graph.plot.getData()[0].data
-//    var data = [];
-//    var last = -1;
-
-//    for(var i=0; i<rawdata.length;i++)
-//    {
-//        if(rawdata[i][0] > last)
-//        {
-//          data.push([rawdata[i][0], rawdata[i][1]]);
-//        }
-//        else
-//        {
-//          $.bootstrapGrowl("<span class=\"glyphicon glyphicon-exclamation-sign\"></span> <b>ERROR 88:</b><br/>An oven is not a time-machine", {
-//            ele: 'body', // which element to append to
-//            type: 'alert', // (null, 'info', 'error', 'success')
-//            offset: {from: 'top', amount: 250}, // 'top', or 'bottom'
-//            align: 'center', // ('left', 'right', or 'center')
-//            width: 385, // (integer, or 'auto')
-//            delay: 5000,
-//            allow_dismiss: true,
-//            stackup_spacing: 10 // spacing between consecutively stacked growls.
-//          });
-
-//          return false;
-//        }
-
-//        last = rawdata[i][0];
-//    }
-
-//    var profile = { "type": "profile", "data": data, "name": name }
-//    var put = { "cmd": "PUT", "profile": profile }
-
-//    var put_cmd = JSON.stringify(put);
-
-//    ws_storage.send(put_cmd);
-
-//    leaveEditMode();
-//}
-
-//function getOptions()
-//{
-
-//  var options =
-//  {
-
-//    series:
-//    {
-//        lines:
-//        {
-//            show: true
-//        },
-
-//        points:
-//        {
-//            show: true,
-//            radius: 5,
-//            symbol: "circle"
-//        },
-
-//        shadowSize: 3
-
-//    },
-
-//	xaxis:
-//    {
-//      min: 0,
-//      tickColor: 'rgba(216, 211, 197, 0.2)',
-//      tickFormatter: timeTickFormatter,
-//      font:
-//      {
-//        size: 14,
-//        lineHeight: 14,        weight: "normal",
-//        family: "Digi",
-//        variant: "small-caps",
-//        color: "rgba(216, 211, 197, 0.85)"
-//      }
-//	},
-
-//	yaxis:
-//    {
-//      min: 0,
-//      tickDecimals: 0,
-//      draggable: false,
-//      tickColor: 'rgba(216, 211, 197, 0.2)',
-//      font:
-//      {
-//        size: 14,
-//        lineHeight: 14,
-//        weight: "normal",
-//        family: "Digi",
-//        variant: "small-caps",
-//        color: "rgba(216, 211, 197, 0.85)"
-//      }
-//	},
-
-//	grid:
-//    {
-//	  color: 'rgba(216, 211, 197, 0.55)',
-//      borderWidth: 1,
-//      labelMargin: 10,
-//      mouseActiveRadius: 50
-//	},
-
-//    legend:
-//    {
-//      show: false
-//    }
-//  }
-
-//  return options;
-
-//}
 var allchecked=false;
 
 $(document).ready(function () {
@@ -1099,6 +882,18 @@ allchecked=false;
 
                     liveaxis_ch1_x.push(x.runtime);
                     liveaxis_ch1_y.push(x.temperature);
+
+                    var TESTER = document.getElementById('tester');
+                    var trace1 = {
+                        x: liveaxis_ch1_x,
+                        y: liveaxis_ch1_y,
+                        type: 'scatter'
+                    };
+                    var data = [trace1];
+
+                    Plotly.newPlot(TESTER, data, {
+                            margin: { t: 0 }
+                        });
                     var q=$("#channel_1").text();
 
                     $("#channel_1").html(Math.round(x.temperature));
@@ -1119,6 +914,17 @@ allchecked=false;
                 case 2:
                     liveaxis_ch2_x.push(x.runtime);
                     liveaxis_ch2_y.push(x.temperature);
+                    var TESTER = document.getElementById('tester1');
+                    var trace1 = {
+                        x: liveaxis_ch2_x,
+                        y: liveaxis_ch2_y,
+                        type: 'scatter'
+                    };
+                    var data = [trace1];
+
+                    Plotly.newPlot(TESTER,   data  , {
+                        margin: { t: 0 }
+                    });
                     $("#channel_2").html(Math.round(x.temperature));
  if(x.heat==1){
                        $(".channel2_led").addClass('led-red');
@@ -1134,6 +940,17 @@ allchecked=false;
                 case 3:
                     liveaxis_ch3_x.push(x.runtime);
                     liveaxis_ch3_y.push(x.temperature);
+                    var TESTER = document.getElementById('tester2');
+                    var trace1 = {
+                        x: liveaxis_ch3_x,
+                        y: liveaxis_ch3_y,
+                        type: 'scatter'
+                    };
+                    var data = [trace1];
+
+                    Plotly.newPlot(TESTER, data, {
+                        margin: { t: 0 }
+                    });
                     $("#channel_3").html(Math.round(x.temperature));
                      if(x.heat==1){
                        $(".channel3_led").addClass('led-red');
@@ -1150,6 +967,17 @@ allchecked=false;
                 case 4:
                     liveaxis_ch4_x.push(x.runtime);
                     liveaxis_ch4_y.push(x.temperature);
+                    var TESTER = document.getElementById('tester3');
+                    var trace1 = {
+                        x: liveaxis_ch4_x,
+                        y: liveaxis_ch4_y,
+                        type: 'scatter'
+                    };
+                    var data = [trace1];
+
+                    Plotly.newPlot(TESTER, data, {
+                        margin: { t: 0 }
+                    });
                     $("#channel_4").html(Math.round(x.temperature));
                      if(x.heat==1){
                        $(".channel4_led").addClass('led-red');
@@ -1164,6 +992,17 @@ allchecked=false;
                 case 5:
                     liveaxis_ch5_x.push(x.runtime);
                     liveaxis_ch5_y.push(x.temperature);
+                    var TESTER = document.getElementById('tester4');
+                    var trace1 = {
+                        x: liveaxis_ch5_x,
+                        y: liveaxis_ch5_y,
+                        type: 'scatter'
+                    };
+                    var data = [trace1];
+
+                    Plotly.newPlot(TESTER, data, {
+                        margin: { t: 0 }
+                    });
                      $("#channel_5").html(Math.round(x.temperature));
                      if(x.heat==1){
                     $(".channel5_led").addClass('led-red');
@@ -1178,6 +1017,17 @@ allchecked=false;
                 case 6:
                     liveaxis_ch6_x.push(x.runtime);
                     liveaxis_ch6_y.push(x.temperature);
+                    var TESTER = document.getElementById('tester5');
+                    var trace1 = {
+                        x: liveaxis_ch6_x,
+                        y: liveaxis_ch6_y,
+                        type: 'scatter'
+                    };
+                    var data = [trace1];
+
+                    Plotly.newPlot(TESTER, data, {
+                        margin: { t: 0 }
+                    });
                     $("#channel_6").html(Math.round(x.temperature));
                      if(x.heat==1){
 
@@ -1209,37 +1059,37 @@ allchecked=false;
                 type: 'scatter'
             };
 
-            universal_checked[universal_checked.length - 5] = trace2;
-            var trace3 = {
-                x: liveaxis_ch3_x,
-                y: liveaxis_ch3_y,
+            //universal_checked[universal_checked.length - 5] = trace2;
+            //var trace3 = {
+            //    x: liveaxis_ch3_x,
+            //    y: liveaxis_ch3_y,
 
-                type: 'scatter'
-            };
-            universal_checked[universal_checked.length - 4] = trace3;
-            var trace4 = {
-                x: liveaxis_ch4_x,
-                y: liveaxis_ch4_y,
+            //    type: 'scatter'
+            //};
+            //universal_checked[universal_checked.length - 4] = trace3;
+            //var trace4 = {
+            //    x: liveaxis_ch4_x,
+            //    y: liveaxis_ch4_y,
 
-                type: 'scatter'
-            };
-            universal_checked[universal_checked.length - 3] = trace4;
-            var trace5 = {
-                x: liveaxis_ch5_x,
-                y: liveaxis_ch5_y,
+            //    type: 'scatter'
+            //};
+            //universal_checked[universal_checked.length - 3] = trace4;
+            //var trace5 = {
+            //    x: liveaxis_ch5_x,
+            //    y: liveaxis_ch5_y,
 
-                type: 'scatter'
-            };
-            universal_checked[universal_checked.length - 2] = trace5;
-            var trace6 = {
-                x: liveaxis_ch6_x,
-                y: liveaxis_ch6_y,
+            //    type: 'scatter'
+            //};
+            //universal_checked[universal_checked.length - 2] = trace5;
+            //var trace6 = {
+            //    x: liveaxis_ch6_x,
+            //    y: liveaxis_ch6_y,
 
-                type: 'scatter'
-            };
+            //    type: 'scatter'
+            //};
            
 
-            universal_checked[universal_checked.length - 1] = trace6;
+            //universal_checked[universal_checked.length - 1] = trace6;
 
             
           
