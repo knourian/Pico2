@@ -203,7 +203,7 @@ function updatenewprofilegraph() {
         datafornewprofile.push(tempdata);
 
     }
-    Plotly.newPlot('newprofilegraph', newprofiledata);
+  Plotly.restyle('newprofilegraph', newprofiledata);
 
 }
 
@@ -256,7 +256,7 @@ function updateeditprofilegraph() {
         title: 'Adding Names to Line and Scatter Plot'
     };
 
-    Plotly.newPlot('editprofilegraph', editprofiledata);
+  Plotly.restyle('editprofilegraph', editprofiledata);
 
 
 }
@@ -312,7 +312,7 @@ function findselectedprofile() {
             title: 'Adding Names to Line and Scatter Plot'
         };
 
-        Plotly.newPlot('editprofilegraph', editprofiledata);
+      Plotly.restyle('editprofilegraph', editprofiledata);
 
 
     });
@@ -370,7 +370,7 @@ function filleditprofileselectlist() {
 //       mode: 'lines'
 //    };
 //    data.push(trace1);
-//    Plotly.newPlot('myDiv', data);
+//  Plotly.restyle('myDiv', data);
 
 //    q = q+10;
 
@@ -430,7 +430,7 @@ function filleditprofileselectlist() {
 //        type: 'lines'
 //    };
 //    data.push(trace1);
-//    Plotly.newPlot('myDiv', data);
+//  Plotly.restyle('myDiv', data);
 
 
 //    console.log(data);
@@ -891,7 +891,7 @@ allchecked=false;
                     };
                     var data = [trace1];
 
-                    Plotly.newPlot(TESTER, data, {
+                  Plotly.restyle(TESTER, data, {
                             margin: { t: 0 }
                         });
                     var q=$("#channel_1").text();
@@ -922,7 +922,7 @@ allchecked=false;
                     };
                     var data = [trace1];
 
-                    Plotly.newPlot(TESTER,   data  , {
+                  Plotly.restyle(TESTER,   data  , {
                         margin: { t: 0 }
                     });
                     $("#channel_2").html(Math.round(x.temperature));
@@ -948,7 +948,7 @@ allchecked=false;
                     };
                     var data = [trace1];
 
-                    Plotly.newPlot(TESTER, data, {
+                  Plotly.restyle(TESTER, data, {
                         margin: { t: 0 }
                     });
                     $("#channel_3").html(Math.round(x.temperature));
@@ -975,7 +975,7 @@ allchecked=false;
                     };
                     var data = [trace1];
 
-                    Plotly.newPlot(TESTER, data, {
+                  Plotly.restyle(TESTER, data, {
                         margin: { t: 0 }
                     });
                     $("#channel_4").html(Math.round(x.temperature));
@@ -1000,7 +1000,7 @@ allchecked=false;
                     };
                     var data = [trace1];
 
-                    Plotly.newPlot(TESTER, data, {
+                  Plotly.restyle(TESTER, data, {
                         margin: { t: 0 }
                     });
                      $("#channel_5").html(Math.round(x.temperature));
@@ -1025,7 +1025,7 @@ allchecked=false;
                     };
                     var data = [trace1];
 
-                    Plotly.newPlot(TESTER, data, {
+                  Plotly.restyle(TESTER, data, {
                         margin: { t: 0 }
                     });
                     $("#channel_6").html(Math.round(x.temperature));
