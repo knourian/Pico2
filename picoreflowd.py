@@ -7,6 +7,7 @@ import logging
 import json
 
 import bottle
+import datetime
 import gevent
 import geventwebsocket
 from gevent.pywsgi import WSGIServer
@@ -248,14 +249,24 @@ def handle_status():
     log.info("websocket (status) closed")
 
 
+import re
+
+pattern = re.compile("^[1-6].csv")
+
+
 def clearFiles():
     try:
         DataFiles = os.listdir(Data_path)
     except:
         DataFiles = []
     for filename in DataFiles:
-        with open(os.path.join(Data_path, filename), 'w+') as f:
-            f.close()
+        if pattern.match(filename):
+            newname = os.path.join(Data_path,
+                                   "%s_%s.csv" % (filename[0:1], datetime.datetime.now().strftime("%Y_%m_%d%H%M%S")))
+            filename = os.path.join(Data_path, filename)
+            os.rename(filename, newname)
+            # with open(os.path.join(Data_path, filename), 'w+') as f:
+            #     f.close()
 
 
 def get_profiles():
