@@ -72,12 +72,12 @@ def handle_control():
             message = wsock.receive()
             log.info("Received (control): %s" % message)
             msgdict = json.loads(message)
+            channelActived = []
             if msgdict.get("cmd") == "RUN":
                 log.info("RUN command received")
                 profile_obj = msgdict.get('profile')
                 channel = 1
                 simulateFlag = True
-                channelActived = []
                 if profile_obj:
                     if eval(((profile_obj['channel'][0]['activated']) + "").capitalize()):
                         profile_json = json.dumps(profile_obj['channel'][0]['profile'])
@@ -141,18 +141,15 @@ def handle_control():
                         simulation_watcher_6.record(profile)
             elif msgdict.get("cmd") == "STOP":
                 log.info("Stop command received")
-                if (1 in channelActived):
+                try:
                     simulated_oven_1.abort_run()
-                if (2 in channelActived):
                     simulated_oven_2.abort_run()
-                if (3 in channelActived):
                     simulated_oven_3.abort_run()
-                if (4 in channelActived):
                     simulated_oven_4.abort_run()
-                if (5 in channelActived):
                     simulated_oven_5.abort_run()
-                if (6 in channelActived):
                     simulated_oven_6.abort_run()
+                except NameError as e:
+                    log.info(e)
                 clearFiles();
         except WebSocketError:
             break
@@ -257,8 +254,7 @@ def clearFiles():
     except:
         DataFiles = []
     for filename in DataFiles:
-        with open(os.path.join(Data_path, filename), 'w') as f:
-            f.truncate()
+        with open(os.path.join(Data_path, filename), 'w+') as f:
             f.close()
 
 

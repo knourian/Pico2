@@ -4,6 +4,7 @@ import random
 import datetime
 import logging
 import json
+import csv
 
 from gevent import os
 
@@ -35,6 +36,7 @@ try:
             raise Exception("gpio_heat pin %s collides with SPI pins %s" % (config.get_gpio_heat(1), spi_reserved_gpio))
     if config.max6675:
         from max6675 import MAX6675, MAX6675Error
+
         log.info("import MAX6675")
     sensor_available = True
 except ImportError:
@@ -47,6 +49,7 @@ try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
     GPIO.setup(config.get_gpio_heat(1), GPIO.OUT)
+    GPIO.setup(config.get_gpio_heat(2), GPIO.OUT)
     GPIO.setup(config.gpio_cool, GPIO.OUT)
     GPIO.setup(config.gpio_air, GPIO.OUT)
     GPIO.setup(config.gpio_door, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -75,7 +78,7 @@ class Oven(threading.Thread):
         if simulate:
             self.temp_sensor = TempSensorSimulate(self, 0.5, self.time_step)
         if sensor_available:
-            self.temp_sensor = TempSensorReal(self.time_step,self)
+            self.temp_sensor = TempSensorReal(self.time_step, self)
         else:
             self.temp_sensor = TempSensorSimulate(self,
                                                   self.time_step,
@@ -122,13 +125,27 @@ class Oven(threading.Thread):
                     self.runtime = runtime_delta.total_seconds()
                 log.info(
                     "running at Channel %d %.1f deg C (Target: %.1f) , heat %.2f, cool %.2f, air %.2f, door %s (%.1fs/%.0f)" % (
-                    self.channel,self.temp_sensor.temperature, self.target, self.heat, self.cool, self.air, self.door, self.runtime,
-                    self.totaltime))
-                buf = "{%.1f , %.1fs}\n" % (self.runtime, self.temp_sensor.temperature)
-                dirpath=config.Data_path
-                dirpath=os.path.join(dirpath, "%d.%s"%(self.channel,"txt"))
-                f=open(dirpath,"a+")
-                f.write(buf)
+                        self.channel, self.temp_sensor.temperature, self.target, self.heat, self.cool, self.air,
+                        self.door, self.runtime,
+                        self.totaltime))
+                dirPath = config.Data_path
+                dirPath = os.path.join(dirPath, "%d.%s" % (self.channel, "csv"))
+                has_header = False
+                if os.path.isfile(dirPath):
+                    with open(dirPath, 'r') as csvfile:
+                        try:
+                            sniffer = csv.Sniffer()
+                            has_header = sniffer.has_header(csvfile.readline())
+                        except Exception as e:
+                            has_header = False
+                f = open(dirPath, "a+",newline='')
+                fieldName = ['time', 'sensor_temp']
+                csvWriter = csv.DictWriter(f, fieldnames=fieldName)
+                if not has_header:
+                    csvWriter.writeheader()
+                runtime = "%.2f" % (self.runtime)
+                sensorTemp = "%.2f" % (self.temp_sensor.temperature)
+                csvWriter.writerow({'time': runtime, 'sensor_temp': sensorTemp})
                 f.close()
                 self.target = self.profile.get_target_temperature(self.runtime)
                 pid = self.pid.compute(self.target, self.temp_sensor.temperature)
@@ -242,7 +259,7 @@ class TempSensor(threading.Thread):
 
 
 class TempSensorReal(TempSensor):
-    def __init__(self, time_step,oven):
+    def __init__(self, time_step, oven):
         TempSensor.__init__(self, time_step)
         if config.max6675:
             log.info("init MAX6675")
@@ -317,7 +334,7 @@ class TempSensorSimulate(TempSensor):
             # temperature change of oven by cooling to env
             t -= p_env * self.time_step / c_oven
             log.debug("energy sim: -> %dW heater: %.0f -> %dW oven: %.0f -> %dW env" % (
-            int(p_heat * self.oven.heat), t_h, int(p_ho), t, int(p_env)))
+                int(p_heat * self.oven.heat), t_h, int(p_ho), t, int(p_env)))
             self.temperature = t
 
             time.sleep(self.sleep_time)

@@ -27,15 +27,15 @@ currency_type = "EUR"  # Currency Symbol to show when calculating cost to run jo
 
 ### Outputs
 #gpio_heat = 12  # Switches zero-cross solid-state-relay
-gpio_cool = 16  # Regulates PWM for 12V DC Blower
-gpio_air = 20  # Switches 0-phase det. solid-state-relay
+gpio_cool = 4  # Regulates PWM for 12V DC Blower
+gpio_air = 24  # Switches 0-phase det. solid-state-relay
 
 
 def get_gpio_sensor_data(channel):
     if channel == 1:
         return 26
     if channel == 2:
-        return 24
+        return 20
     if channel == 3:
         return 22
     if channel == 4:
@@ -50,9 +50,9 @@ def get_gpio_heat(channel):
     if channel == 1:
         return 12
     if channel == 2:
-        return 14
-    if channel == 3:
         return 16
+    if channel == 3:
+        return 14
     if channel == 4:
         return 18
     if channel == 5:
